@@ -1,0 +1,188 @@
+<main class="contenedor">
+  <header>
+    <h1>Administrador de productos</h1>
+    <p>Agrega, consulta y actualiza tu inventario.</p>
+  </header>
+
+  @if (mensaje()) {
+    <p class="mensaje exito" role="status">
+      {{ mensaje() }}
+    </p>
+  }
+
+  @if (error()) {
+    <p class="mensaje error" role="alert">
+      {{ error() }}
+    </p>
+  }
+
+  <section class="tarjeta">
+    <h2>
+      {{ idEdicion() === null
+        ? 'Agregar producto'
+        : 'Editar producto' }}
+    </h2>
+
+    <form
+      [formGroup]="formulario"
+      (ngSubmit)="guardar()"
+    >
+      <fieldset [disabled]="guardando() || cargando()">
+        <div class="campos">
+          <div>
+            <label for="nombre">Nombre</label>
+
+            <input
+              id="nombre"
+              type="text"
+              formControlName="nombre"
+              placeholder="Ejemplo: Teclado"
+            >
+
+            @if (
+              formulario.controls.nombre.touched &&
+              formulario.controls.nombre.invalid
+            ) {
+              <small>
+                Escribe un nombre de al menos 3 caracteres.
+              </small>
+            }
+          </div>
+
+          <div>
+            <label for="precio">Precio ($)</label>
+
+            <input
+              id="precio"
+              type="number"
+              formControlName="precio"
+              min="0.01"
+              step="0.01"
+            >
+
+            @if (
+              formulario.controls.precio.touched &&
+              formulario.controls.precio.invalid
+            ) {
+              <small>
+                El precio debe ser mayor que cero.
+              </small>
+            }
+          </div>
+
+          <div>
+            <label for="cantidad">Cantidad</label>
+
+            <input
+              id="cantidad"
+              type="number"
+              formControlName="cantidad"
+              min="0"
+              step="1"
+            >
+
+            @if (
+              formulario.controls.cantidad.touched &&
+              formulario.controls.cantidad.invalid
+            ) {
+              <small>
+                Escribe una cantidad entera de cero o más.
+              </small>
+            }
+          </div>
+        </div>
+
+        <div class="acciones">
+          <button type="submit">
+            {{ guardando()
+              ? 'Procesando...'
+              : idEdicion() === null
+                ? 'Agregar producto'
+                : 'Guardar cambios' }}
+          </button>
+
+          @if (idEdicion() !== null) {
+            <button
+              type="button"
+              class="secundario"
+              (click)="cancelarEdicion()"
+            >
+              Cancelar
+            </button>
+          }
+        </div>
+      </fieldset>
+    </form>
+  </section>
+
+  <section class="tarjeta">
+    <div class="encabezado-lista">
+      <h2>Productos registrados</h2>
+
+      <button
+        type="button"
+        class="secundario"
+        (click)="cargarProductos()"
+        [disabled]="cargando() || guardando()"
+      >
+        Actualizar lista
+      </button>
+    </div>
+
+    @if (cargando()) {
+      <p role="status">Cargando productos...</p>
+    } @else {
+      <div class="tabla">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Precio</th>
+              <th scope="col">Cantidad</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            @for (producto of productos(); track producto.id) {
+              <tr>
+                <td>{{ producto.id }}</td>
+                <td>{{ producto.nombre }}</td>
+                <td>${{ producto.precio.toFixed(2) }}</td>
+                <td>{{ producto.cantidad }}</td>
+                <td>
+                  <div class="acciones-fila">
+                    <button
+                      type="button"
+                      class="secundario"
+                      (click)="editar(producto)"
+                      [disabled]="guardando()"
+                    >
+                      Editar
+                    </button>
+
+                    <button
+                      type="button"
+                      class="eliminar"
+                      (click)="eliminar(producto)"
+                      [disabled]="guardando()"
+                    >
+                      Eliminar
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            } @empty {
+              <tr>
+                <td colspan="5">
+                  No hay productos para mostrar.
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+  </section>
+</main>

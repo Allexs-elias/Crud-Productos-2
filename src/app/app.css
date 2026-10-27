@@ -1,0 +1,177 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background: #f1f5f9;
+  color: #1e293b;
+  font-family: Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.contenedor {
+  max-width: 1050px;
+  margin: auto;
+  padding: 35px 20px;
+}
+
+header {
+  margin-bottom: 25px;
+}
+
+h1 {
+  margin-bottom: 8px;
+}
+
+header p {
+  color: #64748b;
+}
+
+h2 {
+  margin-top: 0;
+  font-size: 20px;
+}
+
+.tarjeta {
+  background: white;
+  padding: 25px;
+  margin-bottom: 25px;
+  border-radius: 12px;
+  box-shadow: 0 3px 12px #0000000d;
+}
+
+fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+
+.campos {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+input {
+  width: 100%;
+  padding: 11px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 15px;
+}
+
+input:focus {
+  outline: 2px solid #93c5fd;
+  border-color: #2563eb;
+}
+
+small {
+  display: block;
+  margin-top: 7px;
+  color: #b91c1c;
+}
+
+button {
+  padding: 10px 15px;
+  border: 0;
+  border-radius: 6px;
+  background: #2563eb;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+button:hover {
+  filter: brightness(0.92);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.secundario {
+  background: #e2e8f0;
+  color: #1e293b;
+}
+
+.eliminar {
+  background: #dc2626;
+}
+
+.acciones,
+.acciones-fila {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.acciones {
+  margin-top: 20px;
+}
+
+.encabezado-lista {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.encabezado-lista h2 {
+  margin: 0;
+}
+
+.tabla {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 14px;
+  text-align: left;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+th {
+  background: #f8fafc;
+}
+
+.mensaje {
+  padding: 14px;
+  border-radius: 7px;
+}
+
+.exito {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.error {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+@media (max-width: 650px) {
+  .campos {
+    grid-template-columns: 1fr;
+  }
+
+  .encabezado-lista {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
