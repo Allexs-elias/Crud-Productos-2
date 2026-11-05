@@ -1,3 +1,4 @@
+import { ProductSearchComponent } from './product-search/product-search.component';
 import {
   Component,
   DestroyRef,
@@ -18,11 +19,12 @@ import {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, ProductSearchComponent],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App {
+  vista = signal<'catalogo' | 'gestion'>('catalogo');
   private servicio = inject(ProductosService);
   private fb = inject(FormBuilder);
   private destroyRef = inject(DestroyRef);
@@ -59,7 +61,6 @@ export class App {
   });
 
   constructor() {
-    this.cargarProductos();
   }
 
   cargarProductos() {

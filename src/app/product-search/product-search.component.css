@@ -1,0 +1,124 @@
+/* Estilos generales */
+:host {
+  display: block;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+.catalogo {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+}
+
+h1 { color: #2463a6; }
+h2 { font-size: 20px; }
+h3 { font-size: 16px; }
+
+/* Barra de búsqueda */
+.buscador {
+  display: block;
+  margin: 25px 0;
+}
+
+.buscador input {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #2463a6;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+/* Filtros y productos */
+.distribucion {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 20px;
+}
+
+aside {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 15px;
+  align-self: start;
+}
+
+.titulo-filtros, .resumen {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.categorias {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+button {
+  padding: 8px 10px;
+  background: #eee;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover { background: #ddd; }
+button.activa { background: #2463a6; color: white; }
+button:focus-visible, input:focus-visible { outline: 2px solid #16477c; outline-offset: 2px; }
+
+.precio { display: block; margin: 18px 0; }
+.precio strong { float: right; }
+.precio input { width: 100%; margin-top: 10px; accent-color: #2463a6; }
+.aviso { color: #b3261e; font-size: 14px; }
+.resumen span { font-size: 14px; }
+
+/* Tarjetas con CSS Grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 15px;
+}
+
+.tarjeta {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.tarjeta:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 10px #0002;
+}
+
+.imagen img { width: 100%; height: 170px; object-fit: contain; background: #f4f1eb; }
+.detalle { padding: 12px; }
+.detalle h3 { margin: 8px 0; }
+.detalle p { font-size: 14px; line-height: 1.4; }
+.tipo { color: #666; }
+.nombre-precio strong { color: #2463a6; font-size: 18px; }
+.vacio { grid-column: 1 / -1; text-align: center; padding: 30px; background: white; }
+
+/* Ajustes para tablet y celular */
+@media (max-width: 900px) {
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 650px) {
+  .distribucion { grid-template-columns: 1fr; }
+  .resumen { flex-direction: column; align-items: flex-start; margin-bottom: 15px; }
+}
+
+@media (max-width: 400px) {
+  .grid { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tarjeta { transition: none; }
+  .tarjeta:hover { transform: none; }
+}

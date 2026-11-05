@@ -1,3 +1,6 @@
+<nav class="vistas" aria-label="Secciones"><button type="button" [class.seleccionada]="vista() === 'catalogo'" (click)="vista.set('catalogo')">Catálogo</button><button type="button" [class.seleccionada]="vista() === 'gestion'" (click)="vista.set('gestion'); cargarProductos()">Administrar productos</button></nav>
+@if (vista() === 'catalogo') {<app-product-search />}
+@else {
 <main class="contenedor">
   <header>
     <h1>Administrador de productos</h1>
@@ -186,3 +189,4 @@
     }
   </section>
 </main>
+}

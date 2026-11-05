@@ -1,0 +1,17 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> crud-productos@0.0.0 build
+> ng build
+
+❯ Building...
+✔ Building...
+Initial chunk files | Names         |  Raw size | Estimated transfer size
+main-7P2WC5OY.js    | main          | 220.46 kB |                60.96 kB
+styles-ZUOVXSFT.css | styles        |  75 bytes |                75 bytes
+
+                    | Initial total | 220.54 kB |                61.03 kB
+
+Application bundle generation complete. [9.209 seconds] - 2026-11-05T01:38:34.340Z
+
+Output location: /workspace/scratch/d9bf9459f1ce/trabajo/crud-productos/dist/crud-productos
+

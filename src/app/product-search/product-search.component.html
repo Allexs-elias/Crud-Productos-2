@@ -1,0 +1,19 @@
+<section class="catalogo">
+  <h1>Catálogo de productos</h1>
+  <p>Busca productos por nombre, categoría y precio.</p>
+  <label class="buscador"><input type="search" [formControl]="busqueda" placeholder="Buscar producto..." aria-label="Buscar por nombre"></label>
+  <div class="distribucion">
+    <aside><div class="titulo-filtros"><h2>Filtros</h2><button type="button" (click)="limpiar()">Limpiar</button></div>
+      <h3>Categoría</h3><div class="categorias">@for (cat of categorias; track cat) {<button type="button" [class.activa]="categoria.value === cat" [attr.aria-pressed]="categoria.value === cat" (click)="categoria.setValue(cat)">{{ cat }}</button>}</div>
+      <h3>Precio en MXN</h3><label class="precio">Desde <strong>{{ minimo.value | currency:'MXN':'symbol-narrow':'1.0-0' }}</strong><input type="range" min="0" max="4000" step="1" [formControl]="minimo" aria-label="Precio mínimo"></label>
+      <label class="precio">Hasta <strong>{{ maximo.value | currency:'MXN':'symbol-narrow':'1.0-0' }}</strong><input type="range" min="0" max="4000" step="1" [formControl]="maximo" aria-label="Precio máximo"></label>
+      @if (minimo.value > maximo.value) {<p class="aviso">El mínimo debe ser menor o igual al máximo.</p>}
+    </aside>
+    <main>@if (resultados$ | async; as productos) {
+      <div class="resumen" role="status" aria-live="polite"><h2>Productos disponibles</h2><span>{{ productos.length }} productos encontrados</span></div>
+      <div class="grid">@for (producto of productos; track producto.id) {
+        <article class="tarjeta"><div class="imagen"><img [src]="producto.imagen" [alt]="producto.nombre" loading="lazy"></div><div class="detalle"><p class="tipo">{{ producto.categoria }}</p><div class="nombre-precio"><h3>{{ producto.nombre }}</h3><strong>{{ producto.precio | currency:'MXN':'symbol-narrow':'1.0-0' }}</strong></div><p>{{ producto.descripcion }}</p></div></article>
+      } @empty {<div class="vacio"><h3>No encontramos coincidencias</h3><p>Prueba con otro nombre o ajusta los filtros.</p><button type="button" (click)="limpiar()">Ver todos los productos</button></div>}</div>
+    }</main>
+  </div>
+</section>
